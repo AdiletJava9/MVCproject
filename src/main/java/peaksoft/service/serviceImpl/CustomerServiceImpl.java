@@ -44,4 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Agency> searchCustomer(String word) {
         return customerRepository.searchCustomer(word);
     }
+
+    @Override
+    public void assignCustomerToAgency(Long customerId, Long agencyId) {
+        customerRepository.assignCustomerToAgency(customerId, agencyId);
+    }
 }

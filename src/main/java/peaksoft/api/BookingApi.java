@@ -23,7 +23,7 @@ public class BookingApi {
     }
     @GetMapping("/new")
     public String newBooking(Model model) {
-        model.addAttribute("NewBooking",houseService.getAllHouses());
+        model.addAttribute("newBooking",houseService.getAllHouses());
         return "newBooking";
     }
 

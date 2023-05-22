@@ -55,7 +55,7 @@
 </head>
 <body>
 <div class="container" style="width: 80%; margin: 0 auto">
-    <div class="card text-bg-secondary mb-3" style="width: 18rem;" th:each="house:${houses}">
+    <div class="card text-bg-secondary mb-3" style="width: 18rem;" th:each="house:${newBooking}">
         <img th:src="${house.getImage()}" class="card-img-top" alt="House Image">
         <div class="card-body">
                         <h5 class="card-title" th:text="${house.getCountry()}">Country</h5>

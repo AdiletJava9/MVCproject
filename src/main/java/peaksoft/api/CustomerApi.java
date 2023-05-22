@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import peaksoft.entity.Agency;
 import peaksoft.entity.Customer;
+import peaksoft.service.AgencyService;
 import peaksoft.service.CustomerService;
 
 @Controller
@@ -12,6 +14,7 @@ import peaksoft.service.CustomerService;
 @RequiredArgsConstructor
 public class CustomerApi {
     private final CustomerService customerService;
+    private final AgencyService agencyService;
 
     @GetMapping()
     public String getAllCustomers(Model model) {
@@ -24,8 +27,9 @@ public class CustomerApi {
         model.addAttribute("newCustomer", new Customer());
         return "newCustomer";
     }
+
     @GetMapping("/{id}")
-    public String getCustomerById(@PathVariable ("id")Long id,Model model) {
+    public String getCustomerById(@PathVariable("id") Long id, Model model) {
         model.addAttribute("customers", customerService.getCustomerById(id));
         return "CustomerInfo";
     }
@@ -55,4 +59,19 @@ public class CustomerApi {
         customerService.updateCustomer(id, customer);
         return "redirect:/customers";
     }
+
+    @GetMapping("/assign")
+    public String assignCustomerToAgency(Model model) {
+        model.addAttribute("assignCustomer", customerService.getAllCustomers());
+        model.addAttribute("assignAgency", agencyService.getAllAgencies());
+        return "assign";
+    }
+
+    @GetMapping("/adilet")
+    public String assign(@PathVariable("id") Long customerId, @PathVariable("id") Long agencyId, Model model) {
+        model.addAttribute("newAgency", new Agency());
+        customerService.assignCustomerToAgency(customerId, agencyId);
+        return "assigned";
+    }
+
 }

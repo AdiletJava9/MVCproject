@@ -55,4 +55,12 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     public List<Agency> searchCustomer(String word) {
         return null;
     }
+
+    @Override
+    public void assignCustomerToAgency(Long customerId, Long agencyId) {
+        Customer customer = entityManager.find(Customer.class, customerId);
+        Agency agency = entityManager.find(Agency.class, agencyId);
+        customer.getAgencies().add(agency);
+        agency.getCustomers().add(customer);
+    }
 }

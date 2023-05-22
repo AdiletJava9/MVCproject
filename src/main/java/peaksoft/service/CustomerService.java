@@ -17,4 +17,5 @@ public interface CustomerService {
     void deleteCustomerById(Long id);
 
     List<Agency> searchCustomer(String word);
+    void assignCustomerToAgency(Long customerId, Long agencyId);
 }
